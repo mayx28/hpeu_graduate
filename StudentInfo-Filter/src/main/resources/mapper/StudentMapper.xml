@@ -1,0 +1,80 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shixun.online.dao.StudentDaoMyBatis">
+
+	<!-- 配置缓存规则 -->
+	<cache eviction="FIFO" flushInterval="600000" size="512" readOnly="true"/>
+
+		<!-- 获取用户列表 -->
+	<select id="getStudents" resultType="Student">
+		SELECT
+			stu.id,
+			stu.number,
+			stu.name,
+			stu.gender,
+			stu.major,
+			stu.direction,
+			stu.skill,
+			stu.ablity,
+		FROM
+			xm_student stu
+	</select>
+	
+	<!-- 根据 方向获得筛选信息 -->
+	<select id="getInfo" resultType="Student">
+		SELECT
+			stu.id,
+			stu.number,
+			stu.name,
+			stu.gender,
+			stu.major,
+			stu.direction,
+			stu.skill,
+			stu.ablity,
+		FROM
+			xm_student stu
+		WHERE
+		    direction= #{direction}
+	</select>
+	
+	<!-- 根据性别获得筛选信息 -->
+	<select id="getGender" resultType="Student">
+		SELECT
+			stu.id,
+			stu.number,
+			stu.name,
+			stu.gender,
+			stu.major,
+			stu.direction,
+			stu.skill,
+			stu.ablity,
+		FROM
+			xm_student stu
+		WHERE
+		    gender= #{gender}
+	</select>
+	
+<!-- 新增学生信息 -->
+	<insert id="addStudent" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO xm_student (
+			id,
+			number,
+			name,
+			gender,
+			major,
+			direction,
+			skill,
+			ability
+		)
+		VALUES (
+			#{id},
+			#{number},
+			#{name},
+			#{gender},
+			#{major},
+			#{direction},
+			#{skill},
+			#{ability}
+		)
+	</insert>
+</mapper>
